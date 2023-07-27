@@ -349,7 +349,12 @@ tests.get('/', (req, res) => {
 // -------------- VIEW ------------------ //
 
 main.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, '/public/index.html'));
+  if (!req.oidc.isAuthenticated()){
+    res.redirect("http://localhost:8080/login");
+  }
+  else {
+    res.sendFile(path.join(__dirname, '/public/index.html'));
+  }
 });
 
 
