@@ -1,0 +1,631 @@
+{
+  "accessors": [
+    {
+      "bufferView": 2,
+      "componentType": 5126,
+      "count": 65532,
+      "max": [
+        1.7971951961517334,
+        1.9262264966964722,
+        0.5070775747299194
+      ],
+      "min": [
+        -1.2278121709823608,
+        -1.8696205615997314,
+        -0.4165538549423218
+      ],
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 2,
+      "byteOffset": 786384,
+      "componentType": 5126,
+      "count": 65532,
+      "max": [
+        0.99998539686203,
+        0.9999953508377075,
+        0.9999024868011475
+      ],
+      "min": [
+        -0.9999687671661377,
+        -0.9998279213905334,
+        -1.0
+      ],
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 1,
+      "componentType": 5126,
+      "count": 65532,
+      "max": [
+        0.9767286777496338,
+        0.9095137715339661
+      ],
+      "min": [
+        0.0,
+        0.0
+      ],
+      "type": "VEC2"
+    },
+    {
+      "bufferView": 0,
+      "componentType": 5125,
+      "count": 353673,
+      "type": "SCALAR"
+    },
+    {
+      "bufferView": 2,
+      "byteOffset": 1572768,
+      "componentType": 5126,
+      "count": 65532,
+      "max": [
+        1.7975274324417114,
+        1.2114942073822021,
+        0.3015008270740509
+      ],
+      "min": [
+        -1.7587268352508545,
+        -1.8375818729400635,
+        -0.26214587688446045
+      ],
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 2,
+      "byteOffset": 2359152,
+      "componentType": 5126,
+      "count": 65532,
+      "max": [
+        0.9988597631454468,
+        1.0,
+        1.0
+      ],
+      "min": [
+        -0.866706371307373,
+        -0.8937574625015259,
+        -1.0
+      ],
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 1,
+      "byteOffset": 524256,
+      "componentType": 5126,
+      "count": 65532,
+      "max": [
+        0.9089546203613281,
+        0.9005531072616577
+      ],
+      "min": [
+        0.0,
+        0.0
+      ],
+      "type": "VEC2"
+    },
+    {
+      "bufferView": 0,
+      "byteOffset": 1414692,
+      "componentType": 5125,
+      "count": 363696,
+      "type": "SCALAR"
+    },
+    {
+      "bufferView": 2,
+      "byteOffset": 3145536,
+      "componentType": 5126,
+      "count": 65532,
+      "max": [
+        1.7173137664794922,
+        1.2264735698699951,
+        0.3398098945617676
+      ],
+      "min": [
+        -1.7966078519821167,
+        -1.6888909339904785,
+        -0.24104009568691254
+      ],
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 2,
+      "byteOffset": 3931920,
+      "componentType": 5126,
+      "count": 65532,
+      "max": [
+        1.0,
+        0.9992437362670898,
+        1.0
+      ],
+      "min": [
+        -1.0,
+        -1.0,
+        -1.0
+      ],
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 1,
+      "byteOffset": 1048512,
+      "componentType": 5126,
+      "count": 65532,
+      "max": [
+        1.0000001192092896,
+        0.9735268354415894
+      ],
+      "min": [
+        0.02236408181488514,
+        0.0
+      ],
+      "type": "VEC2"
+    },
+    {
+      "bufferView": 0,
+      "byteOffset": 2869476,
+      "componentType": 5125,
+      "count": 364332,
+      "type": "SCALAR"
+    },
+    {
+      "bufferView": 2,
+      "byteOffset": 4718304,
+      "componentType": 5126,
+      "count": 42803,
+      "max": [
+        0.960537850856781,
+        1.9262264966964722,
+        0.47177615761756897
+      ],
+      "min": [
+        -1.7975274324417114,
+        -1.864548921585083,
+        -0.38773858547210693
+      ],
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 2,
+      "byteOffset": 5231940,
+      "componentType": 5126,
+      "count": 42803,
+      "max": [
+        1.0,
+        0.9999953508377075,
+        1.0
+      ],
+      "min": [
+        -0.99998539686203,
+        -0.9998277425765991,
+        -1.0
+      ],
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 1,
+      "byteOffset": 1572768,
+      "componentType": 5126,
+      "count": 42803,
+      "max": [
+        0.9767287969589233,
+        0.9734841585159302
+      ],
+      "min": [
+        0.0,
+        0.0
+      ],
+      "type": "VEC2"
+    },
+    {
+      "bufferView": 0,
+      "byteOffset": 4326804,
+      "componentType": 5125,
+      "count": 226203,
+      "type": "SCALAR"
+    },
+    {
+      "bufferView": 2,
+      "byteOffset": 5745576,
+      "componentType": 5126,
+      "count": 10939,
+      "max": [
+        0.8725048303604126,
+        0.8725048303604126,
+        0.050661057233810425
+      ],
+      "min": [
+        -0.8725048303604126,
+        -1.608954906463623,
+        -0.21650660037994385
+      ],
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 2,
+      "byteOffset": 5876844,
+      "componentType": 5126,
+      "count": 10939,
+      "max": [
+        0.9999999403953552,
+        0.7671240568161011,
+        0.5277154445648193
+      ],
+      "min": [
+        -0.9999999403953552,
+        -0.3672764301300049,
+        -1.0
+      ],
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 1,
+      "byteOffset": 1915192,
+      "componentType": 5126,
+      "count": 10939,
+      "max": [
+        0.8984091877937317,
+        0.5523959994316101
+      ],
+      "min": [
+        0.627646803855896,
+        0.08190643787384033
+      ],
+      "type": "VEC2"
+    },
+    {
+      "bufferView": 0,
+      "byteOffset": 5231616,
+      "componentType": 5125,
+      "count": 56064,
+      "type": "SCALAR"
+    },
+    {
+      "bufferView": 2,
+      "byteOffset": 6008112,
+      "componentType": 5126,
+      "count": 18901,
+      "max": [
+        0.7032160758972168,
+        1.9262264966964722,
+        0.403758704662323
+      ],
+      "min": [
+        -0.7032160758972168,
+        -1.7771737575531006,
+        -0.4152519106864929
+      ],
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 2,
+      "byteOffset": 6234924,
+      "componentType": 5126,
+      "count": 18901,
+      "max": [
+        0.9982524514198303,
+        1.0,
+        0.9999834299087524
+      ],
+      "min": [
+        -0.9982527494430542,
+        -0.9375740885734558,
+        -0.9998587369918823
+      ],
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 1,
+      "byteOffset": 2002704,
+      "componentType": 5126,
+      "count": 18901,
+      "max": [
+        0.8934144377708435,
+        0.9038981795310974
+      ],
+      "min": [
+        0.042710959911346436,
+        0.02838708646595478
+      ],
+      "type": "VEC2"
+    },
+    {
+      "bufferView": 0,
+      "byteOffset": 5455872,
+      "componentType": 5125,
+      "count": 104448,
+      "type": "SCALAR"
+    }
+  ],
+  "asset": {
+    "extras": {
+      "author": "Natrik (https://sketchfab.com/natrik)",
+      "license": "CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)",
+      "source": "https://sketchfab.com/3d-models/shark-floatie-263dfb1a71d64df898179a0ff115c5d9",
+      "title": "Shark Floatie"
+    },
+    "generator": "Sketchfab-15.27.0",
+    "version": "2.0"
+  },
+  "bufferViews": [
+    {
+      "buffer": 0,
+      "byteLength": 5873664,
+      "name": "floatBufferViews",
+      "target": 34963
+    },
+    {
+      "buffer": 0,
+      "byteLength": 2153912,
+      "byteOffset": 5873664,
+      "byteStride": 8,
+      "name": "floatBufferViews",
+      "target": 34962
+    },
+    {
+      "buffer": 0,
+      "byteLength": 6461736,
+      "byteOffset": 8027576,
+      "byteStride": 12,
+      "name": "floatBufferViews",
+      "target": 34962
+    }
+  ],
+  "buffers": [
+    {
+      "byteLength": 14489312,
+      "uri": "scene.bin"
+    }
+  ],
+  "materials": [
+    {
+      "doubleSided": true,
+      "name": "Blue_Plastic",
+      "pbrMetallicRoughness": {
+        "baseColorFactor": [
+          0.0602456,
+          0.133392,
+          0.457531,
+          1.0
+        ],
+        "metallicFactor": 0.0,
+        "roughnessFactor": 0.9691430553110204
+      }
+    },
+    {
+      "doubleSided": true,
+      "name": "Blue_Plastic_2",
+      "pbrMetallicRoughness": {
+        "baseColorFactor": [
+          0.0998981,
+          0.226965,
+          0.799103,
+          1.0
+        ],
+        "metallicFactor": 0.0,
+        "roughnessFactor": 0.9472932055865095
+      }
+    },
+    {
+      "doubleSided": true,
+      "name": "Plastic_Teeth",
+      "pbrMetallicRoughness": {
+        "baseColorFactor": [
+          0.0732353,
+          0.0732353,
+          0.0732353,
+          1.0
+        ],
+        "metallicFactor": 0.0,
+        "roughnessFactor": 0.9894101996722657
+      }
+    }
+  ],
+  "meshes": [
+    {
+      "name": "Torus_Blue Plastic_0",
+      "primitives": [
+        {
+          "attributes": {
+            "NORMAL": 1,
+            "POSITION": 0,
+            "TEXCOORD_0": 2
+          },
+          "indices": 3,
+          "material": 0,
+          "mode": 4
+        }
+      ]
+    },
+    {
+      "name": "Torus_Blue Plastic_0",
+      "primitives": [
+        {
+          "attributes": {
+            "NORMAL": 5,
+            "POSITION": 4,
+            "TEXCOORD_0": 6
+          },
+          "indices": 7,
+          "material": 0,
+          "mode": 4
+        }
+      ]
+    },
+    {
+      "name": "Torus_Blue Plastic_0",
+      "primitives": [
+        {
+          "attributes": {
+            "NORMAL": 9,
+            "POSITION": 8,
+            "TEXCOORD_0": 10
+          },
+          "indices": 11,
+          "material": 0,
+          "mode": 4
+        }
+      ]
+    },
+    {
+      "name": "Torus_Blue Plastic_0",
+      "primitives": [
+        {
+          "attributes": {
+            "NORMAL": 13,
+            "POSITION": 12,
+            "TEXCOORD_0": 14
+          },
+          "indices": 15,
+          "material": 0,
+          "mode": 4
+        }
+      ]
+    },
+    {
+      "name": "Torus_Blue Plastic 2_0",
+      "primitives": [
+        {
+          "attributes": {
+            "NORMAL": 17,
+            "POSITION": 16,
+            "TEXCOORD_0": 18
+          },
+          "indices": 19,
+          "material": 1,
+          "mode": 4
+        }
+      ]
+    },
+    {
+      "name": "Torus_Plastic Teeth_0",
+      "primitives": [
+        {
+          "attributes": {
+            "NORMAL": 21,
+            "POSITION": 20,
+            "TEXCOORD_0": 22
+          },
+          "indices": 23,
+          "material": 2,
+          "mode": 4
+        }
+      ]
+    }
+  ],
+  "nodes": [
+    {
+      "children": [
+        1
+      ],
+      "matrix": [
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        2.220446049250313e-16,
+        -1.0,
+        0.0,
+        0.0,
+        1.0,
+        2.220446049250313e-16,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ],
+      "name": "Sketchfab_model"
+    },
+    {
+      "children": [
+        2
+      ],
+      "matrix": [
+        0.009999999776482582,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.009999999776482582,
+        0.0,
+        0.0,
+        -0.009999999776482582,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ],
+      "name": "Shark Floatie.fbx"
+    },
+    {
+      "children": [
+        3
+      ],
+      "name": "RootNode"
+    },
+    {
+      "children": [
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "matrix": [
+        100.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        -1.629206793918314e-05,
+        -99.99999999999868,
+        0.0,
+        0.0,
+        99.99999999999868,
+        -1.629206793918314e-05,
+        0.0,
+        0.0,
+        61.91585159301758,
+        0.0,
+        1.0
+      ],
+      "name": "Torus"
+    },
+    {
+      "mesh": 0,
+      "name": "Torus_Blue Plastic_0"
+    },
+    {
+      "mesh": 1,
+      "name": "Torus_Blue Plastic_0"
+    },
+    {
+      "mesh": 2,
+      "name": "Torus_Blue Plastic_0"
+    },
+    {
+      "mesh": 3,
+      "name": "Torus_Blue Plastic_0"
+    },
+    {
+      "mesh": 4,
+      "name": "Torus_Blue Plastic 2_0"
+    },
+    {
+      "mesh": 5,
+      "name": "Torus_Plastic Teeth_0"
+    }
+  ],
+  "scene": 0,
+  "scenes": [
+    {
+      "name": "Sketchfab_Scene",
+      "nodes": [
+        0
+      ]
+    }
+  ]
+}
