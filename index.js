@@ -37,6 +37,8 @@ const store = express.Router();
 import path from 'path';
 const __dirname = path.resolve();
 import cors from 'cors';
+import pkg3 from 'express-session';
+const {session} = pkg3;
 
 app.use(
   cors({
@@ -59,6 +61,14 @@ app.use(auth(config));
 // Middleware to make the `user` object available for all views
 app.use(function (req, res, next) {
   res.locals.user = req.oidc.user;
+  next();
+});
+
+// Custom middleware to set global session data
+app.use((req, res, next) => {
+  // Set global session data
+  res.locals.globalVar = "hi_1";
+  // Continue to the next middleware or route
   next();
 });
 
@@ -350,7 +360,13 @@ tests.get('/', (req, res) => {
 
 main.get('/', (req, res) => {
   if (!req.oidc.isAuthenticated()){
-    res.redirect("http://localhost:8080/login");
+    res.oidc.login({
+      returnTo: "/trigger",
+      authorizationParams: {
+        screen_hint: "signup"
+      },
+    });
+    //res.redirect("http://localhost:8080/login");
   }
   else {
     res.sendFile(path.join(__dirname, '/public/index.html'));
@@ -374,6 +390,33 @@ store.get('/', function(req, res){
     res.status(200).json(store);
   });
 });
+
+main.get('/trigger', (req, res) => {
+  // get the unique user ID
+  var jwt = req.oidc.idToken;
+  var decoded_jwt = jwt_decode(jwt);
+  var decoded_sub = decoded_jwt.sub;
+  console.log("decoded_sub: " + decoded_sub);
+  res.redirect("http://localhost:8080");
+  // get where the arrow is currently pointing
+  // const arrowPointing = req.body.arrowPointing;
+  // decrement the store's boat
+  // associate the boat with the corresponding user
+});
+
+
+// main.get('/callback', (req, res) => {
+//   const authorizationCode = req.query.code;
+//   console.log("/callback triggered!");
+//   if (authorizationCode) {
+//     // Do something with the authorization code
+//     console.log('Authorization Code:', authorizationCode);
+//     // Now you can proceed to exchange the authorization code for the JWT
+//   } else {
+//     // Handle error - the authorization code is missing
+//     console.error('Authorization Code not found in URL query parameters.');
+//   }
+// });
 
 const test_helper = () => {
   return 20;

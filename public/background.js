@@ -215,18 +215,21 @@ function render() {
 function arrowToTube() {
     arrow.arrowToTube();
     arrowTracker = "tube";
+    console.log("arrowTracker value: " + arrowTracker);
 }
 document.getElementById("tube").addEventListener("click", arrowToTube);
 
 function arrowToCanoe() {
     arrow.arrowToCanoe();
     arrowTracker = "canoe";
+    console.log("arrowTracker value: " + arrowTracker);
 }
 document.getElementById("canoe").addEventListener("click", arrowToCanoe);
 
 function arrowToKayak() {
     arrow.arrowToKayak();
     arrowTracker = "kayak";
+    console.log("arrowTracker value: " + arrowTracker);
 }
 document.getElementById("kayak").addEventListener("click", arrowToKayak);
 
@@ -241,5 +244,27 @@ document.getElementById("kayak").addEventListener("click", arrowToKayak);
 //     document.getElementById('kayak-total').innerHTML = kayak_total;
 //     document.getElementById('canoe-total').innerHTML = canoe_total;
 // }
+async function fetchTriggerConfirm(){
+    console.log("fetchTriggerConfirm: " + arrowTracker);
+    try {
+        //const url = "https://paprockr-project.uc.r.appspot.com/store"
+        const url = "http://localhost:8080/TriggerConfirm"
+        var response = await fetch(`${url}`, {
+            method: "POST",
+            body: JSON.stringify({
+               arrowTracker: arrowTracker
+            }),
+            headers: {
+            'Access-Control-Allow-Origin':'*',
+          }
+        });
+
+        //var changed_response = await response.text();
+
+    } catch (error) {
+        console.error('Error fetching data:', error);
+    }
+}
+document.getElementById("bottom-button-checkout").addEventListener("click", fetchTriggerConfirm);
 
 export default arrowTracker;
