@@ -19,6 +19,7 @@ const USERS = 'Users'; // entity
 const CLIENT_ID = process.env.CLIENT_ID;
 const CLIENT_SECRET = process.env.CLIENT_SECRET;
 const DOMAIN = process.env.DOMAIN;
+const SITE = process.env.SITE;
 //var { expressjwt: jwt } = require('express-jwt');
 import {expressjwt } from 'express-jwt';
 //var jwksRsa = require('jwks-rsa');
@@ -40,6 +41,10 @@ import cors from 'cors';
 import pkg3 from 'express-session';
 const {session} = pkg3;
 
+//new
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
 app.use(
   cors({
     origin: "*",
@@ -49,7 +54,7 @@ app.use(
 const config = {
   authRequired: false,
   auth0Logout: true,
-  baseURL: `http://localhost:8080`,
+  baseURL: SITE,
   secret: CLIENT_SECRET,
   clientID: CLIENT_ID
 };
@@ -391,32 +396,28 @@ store.get('/', function(req, res){
   });
 });
 
+// this happens immediately after login and right before redirect
 main.get('/trigger', (req, res) => {
   // get the unique user ID
   var jwt = req.oidc.idToken;
   var decoded_jwt = jwt_decode(jwt);
   var decoded_sub = decoded_jwt.sub;
   console.log("decoded_sub: " + decoded_sub);
-  res.redirect("http://localhost:8080");
+  res.redirect(SITE);
   // get where the arrow is currently pointing
   // const arrowPointing = req.body.arrowPointing;
   // decrement the store's boat
   // associate the boat with the corresponding user
 });
 
-
-// main.get('/callback', (req, res) => {
-//   const authorizationCode = req.query.code;
-//   console.log("/callback triggered!");
-//   if (authorizationCode) {
-//     // Do something with the authorization code
-//     console.log('Authorization Code:', authorizationCode);
-//     // Now you can proceed to exchange the authorization code for the JWT
-//   } else {
-//     // Handle error - the authorization code is missing
-//     console.error('Authorization Code not found in URL query parameters.');
-//   }
-// });
+main.post('/confirmbuttonsecond', (req, res) => {
+  console.log("/confirmbuttonsecond triggered!");
+  //console.log("decoded_sub: " + decoded_sub);
+  console.log('Received Body:', req.body);
+  var arrowTracker = req.body.arrowTracker
+  console.log("arrowTracker: " + arrowTracker);
+  res.status(200).send(arrowTracker);
+});
 
 const test_helper = () => {
   return 20;

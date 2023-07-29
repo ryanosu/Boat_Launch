@@ -244,27 +244,31 @@ document.getElementById("kayak").addEventListener("click", arrowToKayak);
 //     document.getElementById('kayak-total').innerHTML = kayak_total;
 //     document.getElementById('canoe-total').innerHTML = canoe_total;
 // }
-async function fetchTriggerConfirm(){
+async function fetchConfirmButton(){
     console.log("fetchTriggerConfirm: " + arrowTracker);
     try {
         //const url = "https://paprockr-project.uc.r.appspot.com/store"
-        const url = "http://localhost:8080/TriggerConfirm"
+        const url = "https://paprockr-project.uc.r.appspot.com/confirmbuttonsecond"
+        const requestBody = {
+            arrowTracker: arrowTracker
+        };
+        console.log("requestBody before JSON.stringify: " + requestBody);
         var response = await fetch(`${url}`, {
             method: "POST",
-            body: JSON.stringify({
-               arrowTracker: arrowTracker
-            }),
+            body: JSON.stringify(requestBody),
             headers: {
             'Access-Control-Allow-Origin':'*',
-          }
+            'Content-Type': 'application/json'
+            }
         });
 
-        //var changed_response = await response.text();
+        var changed_response = await response.text();
+        console.log("changed_response: " + changed_response);
 
     } catch (error) {
         console.error('Error fetching data:', error);
     }
 }
-document.getElementById("bottom-button-checkout").addEventListener("click", fetchTriggerConfirm);
+document.getElementById("bottom-button-checkout").addEventListener("click", fetchConfirmButton);
 
 export default arrowTracker;
