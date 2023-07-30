@@ -41,7 +41,6 @@ const __dirname = path.resolve();
 import cors from 'cors';
 import pkg3 from 'express-session';
 const {session} = pkg3;
-
 //new
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -77,6 +76,7 @@ app.use((req, res, next) => {
   // Continue to the next middleware or route
   next();
 });
+
 
 const checkJwt = expressjwt({
   secret: jwksRsa.expressJwtSecret({
@@ -203,9 +203,17 @@ function get_store() {
   });
 };
 
-// Check for User
+// Check for User in Users
 function check_for_user(owner) {
   const q = datastore.createQuery('Users').filter('owner', '=', `${owner}`);
+  return datastore.runQuery(q).then((entity) => {
+    return entity[0].map(fromDatastore);
+  });
+}
+
+// Check for User in Boats
+function check_for_user_in_boats(owner) {
+  const q = datastore.createQuery('Boats').filter('owner', '=', `${owner}`);
   return datastore.runQuery(q).then((entity) => {
     return entity[0].map(fromDatastore);
   });
@@ -243,6 +251,39 @@ function decrement_store_property(arrowTracker){
   return entities[0].map(fromDatastore);
   });
 };
+
+// increment Store property
+// function increment_store_property(arrowTracker){
+//   const q = datastore.createQuery('Store');
+//   return datastore.runQuery(q).then((entities) => {
+//     console.log("increment_store_property was triggered");
+//     console.log("entities value inside increment_store_property: " + JSON.stringify(entities));
+//   // Use Array.map to call the function fromDatastore. This function
+//   // adds id attribute to every element in the array at element 0 of
+//   // the variable entities
+//     if (arrowTracker == "tube"){
+//       console.log("tube triggered!");
+//       entities[0][0].tubes += 1;
+//     }
+//     else if (arrowTracker == "canoe"){
+//       console.log("canoe triggered!");
+//       entities[0][0].canoes += 1;
+//     }
+//     else if (arrowTracker == "kayak"){
+//       console.log("kayak triggered!");
+//       entities[0][0].kayaks += 1;
+//     }
+//     else {
+//       console.log("increment_store_property failed!");
+//     }
+//     const id = "5647975057457152";
+//     const key = datastore.key([STORE, parseInt(id, 10)]);
+//     const new_data = {"tubes": entities[0][0].tubes, "canoes": entities[0][0].canoes, "kayaks": entities[0][0].kayaks};
+//     datastore.save({ "key": key, "data": new_data });
+    
+//   return entities[0].map(fromDatastore);
+//   });
+// };
 
 // -------------- CONTROLLER ------------ //
 //                                        //
@@ -460,6 +501,8 @@ main.get('/trigger', (req, res) => {
   var jwt = req.oidc.idToken;
   var decoded_jwt = jwt_decode(jwt);
   var decoded_sub = decoded_jwt.sub;
+  // store it globally
+  var testing = decoded_sub;
   // find a way to store decoded_sub globally
   console.log("decoded_sub (trigger route): " + decoded_sub);
   // if decoded_sub (user), not in database, POST it
@@ -485,10 +528,38 @@ main.post('/confirmbuttonsecond', (req, res) => {
   decrement_store_property(arrowTracker).then(returned_from_func => {
     console.log("return value: " + JSON.stringify(returned_from_func));
   });
-  // add a Boats entity of the corresponding Boat (arrowTracker) and the corresponding Owner (decoded_sub)
+  // add a Boats entity of the corresponding Boat (arrowTracker) and include the corresponding Owner (decoded_sub) field
+  var type = arrowTracker;
+  let date = new Date()
+  date = date.toDateString()
+
+  var jwt = req.oidc.idToken;
+  var decoded_jwt = jwt_decode(jwt);
+  var decoded_sub = decoded_jwt.sub;
+
+  post_boat(decoded_sub, type, date).then(boat => {
+    console.log("posted boat return: " + JSON.stringify(boat));
+  })
   // refresh page
   res.redirect(SITE);
 });
+
+// main.get('/cancelbutton', async (req, res) => {
+//   var jwt = req.oidc.idToken;
+//   var decoded_jwt = jwt_decode(jwt);
+//   var decoded_sub = decoded_jwt.sub;
+
+//   // check out the Boats entity for a match to Owner, and delete that Boat
+//   var boat = await check_for_user_in_boats(decoded_sub);
+//   var type = boat[0].type;
+//   var delete_response = await delete_boat(boat[0].id);
+
+//   // increment that value in the database
+//   var resp = await increment_store_property(type);
+  
+//   // refresh page
+//   res.redirect(SITE);
+// });
 
 const test_helper = () => {
   return 20;

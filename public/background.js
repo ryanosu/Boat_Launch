@@ -271,4 +271,27 @@ async function fetchConfirmButton(){
 }
 document.getElementById("bottom-button-checkout").addEventListener("click", fetchConfirmButton);
 
+// async function fetchCancel(){
+//     try {
+//         //const url = "https://paprockr-project.uc.r.appspot.com/store"
+//         const url = "https://paprockr-project.uc.r.appspot.com/cancelbutton"
+    
+//         //console.log("requestBody before JSON.stringify: " + requestBody);
+//         var response = await fetch(`${url}`, {
+//             method: "GET",
+//             headers: {
+//             'Access-Control-Allow-Origin':'*',
+//             'Content-Type': 'application/json'
+//             }
+//         });
+
+//         var changed_response = await response.text();
+//         console.log("changed_response: " + changed_response);
+
+//     } catch (error) {
+//         console.error('Error fetching data:', error);
+//     }
+// }
+// document.getElementById("bottom-button-cancel").addEventListener("click", fetchCancel);
+
 export default arrowTracker;
