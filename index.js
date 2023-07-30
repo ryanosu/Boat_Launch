@@ -253,37 +253,37 @@ function decrement_store_property(arrowTracker){
 };
 
 // increment Store property
-// function increment_store_property(arrowTracker){
-//   const q = datastore.createQuery('Store');
-//   return datastore.runQuery(q).then((entities) => {
-//     console.log("increment_store_property was triggered");
-//     console.log("entities value inside increment_store_property: " + JSON.stringify(entities));
-//   // Use Array.map to call the function fromDatastore. This function
-//   // adds id attribute to every element in the array at element 0 of
-//   // the variable entities
-//     if (arrowTracker == "tube"){
-//       console.log("tube triggered!");
-//       entities[0][0].tubes += 1;
-//     }
-//     else if (arrowTracker == "canoe"){
-//       console.log("canoe triggered!");
-//       entities[0][0].canoes += 1;
-//     }
-//     else if (arrowTracker == "kayak"){
-//       console.log("kayak triggered!");
-//       entities[0][0].kayaks += 1;
-//     }
-//     else {
-//       console.log("increment_store_property failed!");
-//     }
-//     const id = "5647975057457152";
-//     const key = datastore.key([STORE, parseInt(id, 10)]);
-//     const new_data = {"tubes": entities[0][0].tubes, "canoes": entities[0][0].canoes, "kayaks": entities[0][0].kayaks};
-//     datastore.save({ "key": key, "data": new_data });
+function increment_store_property(arrowTracker){
+  const q = datastore.createQuery('Store');
+  return datastore.runQuery(q).then((entities) => {
+    console.log("increment_store_property was triggered");
+    console.log("entities value inside increment_store_property: " + JSON.stringify(entities));
+  // Use Array.map to call the function fromDatastore. This function
+  // adds id attribute to every element in the array at element 0 of
+  // the variable entities
+    if (arrowTracker == "tube"){
+      console.log("tube triggered!");
+      entities[0][0].tubes += 1;
+    }
+    else if (arrowTracker == "canoe"){
+      console.log("canoe triggered!");
+      entities[0][0].canoes += 1;
+    }
+    else if (arrowTracker == "kayak"){
+      console.log("kayak triggered!");
+      entities[0][0].kayaks += 1;
+    }
+    else {
+      console.log("increment_store_property failed!");
+    }
+    const id = "5647975057457152";
+    const key = datastore.key([STORE, parseInt(id, 10)]);
+    const new_data = {"tubes": entities[0][0].tubes, "canoes": entities[0][0].canoes, "kayaks": entities[0][0].kayaks};
+    datastore.save({ "key": key, "data": new_data });
     
-//   return entities[0].map(fromDatastore);
-//   });
-// };
+  return entities[0].map(fromDatastore);
+  });
+};
 
 // -------------- CONTROLLER ------------ //
 //                                        //
@@ -544,22 +544,26 @@ main.post('/confirmbuttonsecond', (req, res) => {
   res.redirect(SITE);
 });
 
-// main.get('/cancelbutton', async (req, res) => {
-//   var jwt = req.oidc.idToken;
-//   var decoded_jwt = jwt_decode(jwt);
-//   var decoded_sub = decoded_jwt.sub;
+main.get('/cancelbutton', async (req, res) => {
+  console.log("Server Side - Cancel Button Triggered!");
+  var jwt = req.oidc.idToken;
+  var decoded_jwt = jwt_decode(jwt);
+  var decoded_sub = decoded_jwt.sub;
 
-//   // check out the Boats entity for a match to Owner, and delete that Boat
-//   var boat = await check_for_user_in_boats(decoded_sub);
-//   var type = boat[0].type;
-//   var delete_response = await delete_boat(boat[0].id);
+  // check out the Boats entity for a match to Owner, and delete that Boat
+  var boat = await check_for_user_in_boats(decoded_sub);
+  console.log("boat returned in check_for_user_in_boats: " + JSON.stringify(boat));
+  var type = boat[0].type;
+  console.log("type: " + type);
+  var delete_response = await delete_boat(boat[0].id);
+  console.log("delete_response: " + delete_response);
 
-//   // increment that value in the database
-//   var resp = await increment_store_property(type);
+  // increment that value in the database
+  var resp = await increment_store_property(type);
   
-//   // refresh page
-//   res.redirect(SITE);
-// });
+  // refresh page
+  res.send("hi!");
+});
 
 const test_helper = () => {
   return 20;
