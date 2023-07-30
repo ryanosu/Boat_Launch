@@ -17,3 +17,17 @@ Upon confirmation, the number of that particular boat decrements and will appear
 <li>Backend: Express, Google Cloud Platform's NoSQL Datastore</li>
 <li>Frontend: JavaScript, HTML, CSS</li>
 <li>Other: Google Cloud Platform, OAuth2, OpenID-Connect, Auth0</li>
+
+<h2>How to use:</h2>
+
+1. Clone this repository
+
+```sh
+https://github.com/ryanosu/Boat_Launch.git
+```
+
+2. Run the app
+
+```sh
+Node Index.js
+```
