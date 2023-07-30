@@ -16,6 +16,7 @@ import request from 'request';
 const datastore = new Datastore(); // creates a Client
 const BOATS = 'Boats'; // entity
 const USERS = 'Users'; // entity
+const STORE = 'Store'; //entity
 const CLIENT_ID = process.env.CLIENT_ID;
 const CLIENT_SECRET = process.env.CLIENT_SECRET;
 const DOMAIN = process.env.DOMAIN;
@@ -161,6 +162,22 @@ function get_boat(id) {
   });
 };
 
+/* ------------- GET 1 User ------------------------ */
+function get_user(id) {
+  const key = datastore.key([USERS, parseInt(id, 10)]);
+  return datastore.get(key).then((entity) => {
+      if (entity[0] === undefined || entity[0] === null) {
+          // No entity found. Don't try to add the id attribute
+          return entity;
+      } 
+      else {
+          // Use Array.map to call the function fromDatastore. This function
+          // adds id attribute to every element in the array entity
+          return entity.map(fromDatastore);
+      }
+  });
+};
+
 /* ------------- UPDATE 1 Boat ---------------------- */
 function put_boat(id, owner, type, date) {
   const key = datastore.key([BOATS, parseInt(id, 10)]);
@@ -174,7 +191,7 @@ function delete_boat(id) {
   return datastore.delete(key);
 };
 
-/* ------------- GET All Users ---------------------- */
+/* ------------- GET Store ---------------------- */
 function get_store() {
   const q = datastore.createQuery('Store');
   return datastore.runQuery(q).then((entities) => {
@@ -182,6 +199,47 @@ function get_store() {
   // Use Array.map to call the function fromDatastore. This function
   // adds id attribute to every element in the array at element 0 of
   // the variable entities
+  return entities[0].map(fromDatastore);
+  });
+};
+
+// Check for User
+function check_for_user(owner) {
+  const q = datastore.createQuery('Users').filter('owner', '=', `${owner}`);
+  return datastore.runQuery(q).then((entity) => {
+    return entity[0].map(fromDatastore);
+  });
+}
+
+// decrement Store property
+function decrement_store_property(arrowTracker){
+  const q = datastore.createQuery('Store');
+  return datastore.runQuery(q).then((entities) => {
+    console.log("decrement_store_property was triggered");
+    console.log("entities value inside decrement_store_property: " + JSON.stringify(entities));
+  // Use Array.map to call the function fromDatastore. This function
+  // adds id attribute to every element in the array at element 0 of
+  // the variable entities
+    if (arrowTracker == "tube"){
+      console.log("tube triggered!");
+      entities[0][0].tubes -= 1;
+    }
+    else if (arrowTracker == "canoe"){
+      console.log("canoe triggered!");
+      entities[0][0].canoes -= 1;
+    }
+    else if (arrowTracker == "kayak"){
+      console.log("kayak triggered!");
+      entities[0][0].kayaks -= 1;
+    }
+    else {
+      console.log("decrement_store_property failed!");
+    }
+    const id = "5647975057457152";
+    const key = datastore.key([STORE, parseInt(id, 10)]);
+    const new_data = {"tubes": entities[0][0].tubes, "canoes": entities[0][0].canoes, "kayaks": entities[0][0].kayaks};
+    datastore.save({ "key": key, "data": new_data });
+    
   return entities[0].map(fromDatastore);
   });
 };
@@ -402,21 +460,34 @@ main.get('/trigger', (req, res) => {
   var jwt = req.oidc.idToken;
   var decoded_jwt = jwt_decode(jwt);
   var decoded_sub = decoded_jwt.sub;
-  console.log("decoded_sub: " + decoded_sub);
-  res.redirect(SITE);
-  // get where the arrow is currently pointing
-  // const arrowPointing = req.body.arrowPointing;
-  // decrement the store's boat
-  // associate the boat with the corresponding user
+  // find a way to store decoded_sub globally
+  console.log("decoded_sub (trigger route): " + decoded_sub);
+  // if decoded_sub (user), not in database, POST it
+  check_for_user(decoded_sub).then(user => {
+    if (user[0] === undefined || user[0] === null) {
+        // The 0th element is undefined. This means there is no boat with this id
+        // if user not in database, POST the new user
+        console.log("post_new_user: " + decoded_sub);
+        post_new_user(decoded_sub);
+    }
+    res.redirect(SITE);
+  });
+  //res.redirect(SITE);
 });
 
 main.post('/confirmbuttonsecond', (req, res) => {
-  console.log("/confirmbuttonsecond triggered!");
+  //console.log("/confirmbuttonsecond triggered!");
   //console.log("decoded_sub: " + decoded_sub);
-  console.log('Received Body:', req.body);
+  //console.log('Received Body:', req.body);
   var arrowTracker = req.body.arrowTracker
-  console.log("arrowTracker: " + arrowTracker);
-  res.status(200).send(arrowTracker);
+  console.log("index.js-arrowTracker: " + arrowTracker);
+  // decrement in the Store entity the corresponding Boat (arrowTracker)
+  decrement_store_property(arrowTracker).then(returned_from_func => {
+    console.log("return value: " + JSON.stringify(returned_from_func));
+  });
+  // add a Boats entity of the corresponding Boat (arrowTracker) and the corresponding Owner (decoded_sub)
+  // refresh page
+  res.redirect(SITE);
 });
 
 const test_helper = () => {

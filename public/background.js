@@ -245,14 +245,14 @@ document.getElementById("kayak").addEventListener("click", arrowToKayak);
 //     document.getElementById('canoe-total').innerHTML = canoe_total;
 // }
 async function fetchConfirmButton(){
-    console.log("fetchTriggerConfirm: " + arrowTracker);
+    console.log("background.js-arrowTracker " + arrowTracker);
     try {
         //const url = "https://paprockr-project.uc.r.appspot.com/store"
         const url = "https://paprockr-project.uc.r.appspot.com/confirmbuttonsecond"
         const requestBody = {
             arrowTracker: arrowTracker
         };
-        console.log("requestBody before JSON.stringify: " + requestBody);
+        //console.log("requestBody before JSON.stringify: " + requestBody);
         var response = await fetch(`${url}`, {
             method: "POST",
             body: JSON.stringify(requestBody),
@@ -262,8 +262,8 @@ async function fetchConfirmButton(){
             }
         });
 
-        var changed_response = await response.text();
-        console.log("changed_response: " + changed_response);
+        //var changed_response = await response.text();
+        //console.log("changed_response: " + changed_response);
 
     } catch (error) {
         console.error('Error fetching data:', error);
