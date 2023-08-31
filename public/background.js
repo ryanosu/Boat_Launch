@@ -264,6 +264,9 @@ async function fetchConfirmButton(){
 
         //var changed_response = await response.text();
         //console.log("changed_response: " + changed_response);
+        var id = arrowTracker + '-total'
+        console.log("id: " + id);
+        document.getElementById(id).innerHTML -= 1;
 
     } catch (error) {
         console.error('Error fetching data:', error);
@@ -287,6 +290,10 @@ async function fetchCancel(){
 
         var changed_response = await response.text();
         console.log("changed_response: " + changed_response);
+
+        var id = arrowTracker + '-total'
+        console.log("cancel id: " + id);
+        document.getElementById(id).innerHTML ++;
 
     } catch (error) {
         console.error('Error fetching data:', error);
