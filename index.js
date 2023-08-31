@@ -518,12 +518,24 @@ main.get('/trigger', (req, res) => {
   //res.redirect(SITE);
 });
 
-main.post('/confirmbuttonsecond', (req, res) => {
+main.post('/confirmbuttonsecond', async (req, res) => {
   //console.log("/confirmbuttonsecond triggered!");
   //console.log("decoded_sub: " + decoded_sub);
   //console.log('Received Body:', req.body);
   var arrowTracker = req.body.arrowTracker
   console.log("index.js-arrowTracker: " + arrowTracker);
+
+  var jwt = req.oidc.idToken;
+  var decoded_jwt = jwt_decode(jwt);
+  var decoded_sub = decoded_jwt.sub;
+  // check out the Boats entity for a match to Owner
+  var boat = await check_for_user_in_boats(decoded_sub);
+  console.log("boat returned in check_for_user_in_boats: " + JSON.stringify(boat));
+  if (boat.length != 0){
+    // boat found
+    res.send("fail!");
+  }
+
   // decrement in the Store entity the corresponding Boat (arrowTracker)
   decrement_store_property(arrowTracker).then(returned_from_func => {
     console.log("return value: " + JSON.stringify(returned_from_func));
@@ -552,7 +564,14 @@ main.get('/cancelbutton', async (req, res) => {
 
   // check out the Boats entity for a match to Owner, and delete that Boat
   var boat = await check_for_user_in_boats(decoded_sub);
+
   console.log("boat returned in check_for_user_in_boats: " + JSON.stringify(boat));
+  
+  // attempting to cancel nothing
+  if (boat[0] === undefined || boat[0] === null){
+    res.send("fail!");
+  }
+
   var type = boat[0].type;
   console.log("type: " + type);
   var delete_response = await delete_boat(boat[0].id);
@@ -562,7 +581,7 @@ main.get('/cancelbutton', async (req, res) => {
   var resp = await increment_store_property(type);
   
   // refresh page
-  res.send("hi!");
+  res.send(type);
 });
 
 const test_helper = () => {

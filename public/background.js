@@ -262,8 +262,13 @@ async function fetchConfirmButton(){
             }
         });
 
-        //var changed_response = await response.text();
-        //console.log("changed_response: " + changed_response);
+        var changed_response = await response.text();
+        console.log("confirm_button_server_response: " + changed_response);
+        if (changed_response == "fail!"){
+            alert("You already rented a boat! Cancel your current rental first.");
+            return;
+        }
+
         var id = arrowTracker + '-total'
         console.log("id: " + id);
         document.getElementById(id).innerHTML -= 1;
@@ -275,6 +280,7 @@ async function fetchConfirmButton(){
 document.getElementById("bottom-button-checkout").addEventListener("click", fetchConfirmButton);
 
 async function fetchCancel(){
+    
     try {
         //const url = "https://paprockr-project.uc.r.appspot.com/store"
         const url = "https://paprockr-project.uc.r.appspot.com/cancelbutton"
@@ -288,10 +294,14 @@ async function fetchCancel(){
             }
         });
 
-        var changed_response = await response.text();
-        console.log("changed_response: " + changed_response);
+        var cancel_response = await response.text();
+        console.log("cancel_response: " + cancel_response);
+        if (changed_response == "fail!"){
+            alert("You haven't confirmed your boat rental!");
+            return;
+        }
 
-        var id = arrowTracker + '-total'
+        var id = cancel_response + '-total'
         console.log("cancel id: " + id);
         document.getElementById(id).innerHTML ++;
 
