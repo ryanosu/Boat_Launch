@@ -25,8 +25,18 @@ A user may use the arrow keys on their keyboard to move the kayak and collect th
 https://github.com/ryanosu/Boat_Launch.git
 ```
 
-2. Set proper configurations and run the app
+2. Set proper configurations
+   
+3. Run the app
 
 ```sh
 node index.js
 ```
+
+<h2>Todo:</h2>
+
+- [ ] Enable any boat to be able to move via keyboard arrow keys
+- [ ] After a user confirms their rental, remove the arrow and focus the camera on that boat
+- [ ] Add a counter graphic for the number of coins collected
+- [ ] Add background music
+- [ ] Add a sound when a coin is collected
