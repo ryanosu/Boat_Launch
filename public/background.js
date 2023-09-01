@@ -40,6 +40,13 @@ loader.load('./canoe/scene.gltf', function(gltf){
     gltf.scene.rotation.y = 1.5;
 })
 
+loader.load('./islands/scene.gltf', function(gltf){
+    scene.add(gltf.scene);
+    gltf.scene.scale.set(2,2,2);
+    gltf.scene.position.set(-150,-100,50);
+    gltf.scene.rotation.y = 1.5;
+})
+
 class Arrow {
     constructor(){
         loader.load('./arrow/scene.gltf', (gltf) => {
@@ -296,7 +303,7 @@ async function fetchCancel(){
 
         var cancel_response = await response.text();
         console.log("cancel_response: " + cancel_response);
-        if (changed_response == "fail!"){
+        if (cancel_response == "fail!"){
             alert("You haven't confirmed your boat rental!");
             return;
         }
