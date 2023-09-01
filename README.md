@@ -10,7 +10,7 @@ Pick a boat and confirm your intent to rent it! Press Cancel to undo your order.
 
 ![chrome_rBKqHMVFsG](https://github.com/ryanosu/Boat_Launch/assets/86269596/0854d6b0-76d3-442f-910d-e5fb807b35f9)
 
-Move the arrow keys to collect the gold coins
+Press the arrow keys to move your boat and collect the gold coins
 
 <h2>About</h2>
 This app allows the user to rent a boat - a tube, kayak, or canoe. <br> <br> Upon confirmation, the number of that particular boat decrements. If the user then presses Cancel, the number of that particular boat in stock will increment. <br> <br> 
