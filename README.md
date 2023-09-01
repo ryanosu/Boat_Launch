@@ -9,8 +9,8 @@ Create an account and login using OAuth2
 Pick a boat and confirm your intent to rent it! Press Cancel to undo your order.
 
 <h2>About</h2>
-This app allows the user to rent a boat - tube, kayak, or canoe - if it is available. <br> <br> Upon confirmation, the number of that particular boat decrements. If the user presses Cancel, the number of that particular boat in stock will increment. <br> <br> 
-A user may use the arrow keys on their keyboard to move the kayak and collect the dispersed coins on the ocean.
+This app allows the user to rent a boat - a tube, kayak, or canoe. <br> <br> Upon confirmation, the number of that particular boat decrements. If the user then presses Cancel, the number of that particular boat in stock will increment. <br> <br> 
+A user may use the arrow keys on their keyboard to move the kayak around the ocean and collect the dispersed gold coins.
 
 <h2>Technologies:</h2>
 <li>Backend: Express, Google Cloud Platform's NoSQL Datastore</li>
