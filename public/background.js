@@ -12,6 +12,10 @@ let controls, water, sun;
 
 const loader = new GLTFLoader();
 
+function random(min, max){
+    return Math.random() * (max-min) + min;
+}
+
 loader.load('./boat/scene.gltf', function(gltf){
     scene.add(gltf.scene);
     gltf.scene.scale.set(3,3,3);
@@ -19,12 +23,12 @@ loader.load('./boat/scene.gltf', function(gltf){
     gltf.scene.rotation.y = 1.5;
 })
 
-loader.load('./kayak/scene.gltf', function(gltf){
-    scene.add(gltf.scene);
-    gltf.scene.scale.set(20,20,20);
-    gltf.scene.position.set(-5,-2,50);
-    gltf.scene.rotation.y = 1.5;
-})
+// loader.load('./kayak/scene.gltf', function(gltf){
+//     scene.add(gltf.scene);
+//     gltf.scene.scale.set(20,20,20);
+//     gltf.scene.position.set(-5,-2,50);
+//     gltf.scene.rotation.y = 1.5;
+// })
 
 loader.load('./tube/scene.gltf', function(gltf){
     scene.add(gltf.scene);
@@ -46,6 +50,37 @@ loader.load('./islands/scene.gltf', function(gltf){
     gltf.scene.position.set(-150,-100,50);
     gltf.scene.rotation.y = 1.5;
 })
+
+class Kayak{
+    constructor(){
+        loader.load('./kayak/scene.gltf', (gltf) => {
+            scene.add(gltf.scene);
+            gltf.scene.scale.set(20,20,20);
+            gltf.scene.position.set(-5,-2,50);
+            gltf.scene.rotation.y = 1.5;
+
+            this.kayak = gltf.scene
+            this.speed = {
+                vel: 0,
+                rot: 0
+            }
+        })
+    }
+
+    stop(){
+        this.speed.vel = 0
+        this.speed.rot = 0
+    }
+
+    update(){
+        if(this.kayak){
+            this.kayak.rotation.y += this.speed.rot
+            this.kayak.translateX(this.speed.vel)
+        }
+    }
+}
+
+const kayak = new Kayak();
 
 class Arrow {
     constructor(){
@@ -107,10 +142,46 @@ class Arrow {
 
 const arrow = new Arrow()
 
+class Coin{
+    constructor(_scene){
+        scene.add(_scene);
+        _scene.scale.set(6,6,6);
+        _scene.position.set(random(-100, 100),1,random(-100, 100));
+        //gltf.scene.rotation.y = 1.5;
+
+        this.coin = _scene;
+    }
+}
+
+async function loadModel(path){
+    return new Promise((resolve, reject) => {
+        loader.load(path, (gltf) => {
+            resolve(gltf.scene)
+        })
+    })
+}
+
+let boatModel = null
+async function createCoin(){
+    if(!boatModel){
+        boatModel = await loadModel('./coin/scene.gltf')
+    }
+    return new Coin(boatModel.clone())
+}
+
+//let coin = new Coin();
+// setTimeout(() =>{
+//     createCoin().then(coin =>{
+//         console.log(coin)
+//     })
+// }, 1000)
+let coins = []
+const COIN_COUNT = 10;
+
 init();
 animate();
 
-function init() {
+async function init() {
 
     // Renderer
 
@@ -197,9 +268,31 @@ function init() {
 
     const waterUniforms = water.material.uniforms;
 
-    //
+    // create coins
+    for(let i = 0; i < COIN_COUNT; i++){
+        const coin = await createCoin()
+        coins.push(coin)
+    }
 
     window.addEventListener( 'resize', onWindowResize );
+
+    window.addEventListener( 'keydown', function(e){
+        if(e.key == "ArrowUp"){
+            kayak.speed.vel = 1
+        }
+        if(e.key == "ArrowDown"){
+            kayak.speed.vel = -1
+        }
+        if(e.key == "ArrowRight"){
+            kayak.speed.rot = -0.1
+        }
+        if(e.key == "ArrowLeft"){
+            kayak.speed.rot = 0.1
+        }
+    })
+    window.addEventListener('keyup', function(e){
+        kayak.stop()
+    })
 }
 
 function onWindowResize() {
@@ -208,10 +301,32 @@ function onWindowResize() {
     renderer.setSize( window.innerWidth, window.innerHeight );
 }
 
+function isColliding(obj1, obj2){
+    return (
+        Math.abs(obj1.position.x - obj2.position.x) < 15 &&
+        Math.abs(obj2.position.z - obj2.position.z) < 15
+    )
+}
+
+function checkCollisions(){
+    if(kayak.kayak){
+        coins.forEach(coin => {
+            if(coin.coin){
+                if(isColliding(kayak.kayak, coin.coin)){
+                    scene.remove(coin.coin)
+                }
+            }
+        })
+    }
+}
+
 function animate() {
     requestAnimationFrame( animate );
     render();
     arrow.update();
+    kayak.update();
+    checkCollisions()
+        
 }
 
 function render() {
