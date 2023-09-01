@@ -14,7 +14,7 @@ A user may use the arrow keys on their keyboard to move the kayak and collect th
 
 <h2>Technologies:</h2>
 <li>Backend: Express, Google Cloud Platform's NoSQL Datastore</li>
-<li>Frontend: JavaScript, HTML, CSS</li>
+<li>Frontend: JavaScript, Three.js, HTML, CSS</li>
 <li>Other: Google Cloud Platform, OAuth2, OpenID-Connect, Auth0</li>
 
 <h2>How to use:</h2>
