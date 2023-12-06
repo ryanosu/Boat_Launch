@@ -37,6 +37,11 @@ https://github.com/ryanosu/Boat_Launch.git
 node index.js
 ```
 
+<h2>Or view mine live on Google Cloud Platform:</h2>
+
+```sh
+https://paprockr-project.uc.r.appspot.com/
+```
 <h2>Todo:</h2>
 
 - [ ] Enable any boat to be able to move via keyboard arrow keys
